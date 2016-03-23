@@ -23,10 +23,27 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 	paras := r.URL.Query()
 	mingl := paras["m"][0]
 
-	client := redis.RedisPool.Get()
-	defer client.Close()
+	var redis redis.Redis = redis.RedisPool.Get()
+	defer redis.Close()
 
-	v, _ := client.Do("GET", mingl)
+	v, _ := redis.Do("GET", mingl)
 	fmt.Printf("hello %s\n", v)
 	fmt.Fprintf(w, "Hello! %s", v)
+}
+
+func Login(w http.ResponseWriter, r *http.Request) {
+
+	paras := r.URL.Query()
+	id := paras["id"][0]
+	passwd := paras["passwd"][0]
+
+	var redis redis.Redis = redis.RedisPool.Get()
+
+	passwdForRedis := redis.Get("user" + id + "pass")
+
+	if passwd == passwdForRedis {
+		http.ServeFile(w, r, "./static/html/login.html")
+	} else {
+		http.ServeFile(w, r, "./static/html/index.html")
+	}
 }
