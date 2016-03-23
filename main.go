@@ -2,22 +2,20 @@ package main
 
 import (
 	"fmt"
-	"mynet"
+	c "mynet/controller"
 	"net/http"
 	"os"
 )
 
 func main() {
 
-	mynet.InitPool()
-
 	server := http.NewServeMux()
 	staticDirHandler(server, "/static", "./static", 0)
-	server.HandleFunc("/redis", mynet.Hello)
-	server.HandleFunc("/hello", mynet.HelloHandler)
-	server.HandleFunc("/niaho", mynet.MyUri)
+	server.HandleFunc("/redis", c.Hello)
+	server.HandleFunc("/hello", c.HelloHandler)
+	server.HandleFunc("/niaho", c.MyUri)
 	server.HandleFunc("/", index)
-	err := http.ListenAndServe(":10000", server)
+	err := http.ListenAndServe(":1313", server)
 	if err != nil {
 		fmt.Println("bind error")
 	}
