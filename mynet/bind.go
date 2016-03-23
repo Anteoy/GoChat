@@ -12,3 +12,6 @@ func HelloHandler(res http.ResponseWriter, req *http.Request) {
 func MyUri(res http.ResponseWriter, req *http.Request) {
 	io.WriteString(res, "ok")
 }
+
+func Redis(res http.ResponseWriter, req *http.Request) {
+}
