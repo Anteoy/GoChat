@@ -3,19 +3,23 @@ package main
 import (
 	"fmt"
 	c "mynet/controller"
+	"mynet/redis"
 	"net/http"
 	"os"
 )
 
 func main() {
 
+	redis.InitPool()
+
 	server := http.NewServeMux()
 	staticDirHandler(server, "/static", "./static", 0)
-	server.HandleFunc("/redis", c.Hello)
+	server.HandleFunc("/redis", c.Redis)
 	server.HandleFunc("/hello", c.HelloHandler)
-	server.HandleFunc("/niaho", c.MyUri)
+	server.HandleFunc("/nihao", c.MyUri)
+	server.HandleFunc("/login", c.Login)
 	server.HandleFunc("/", index)
-	err := http.ListenAndServe(":1313", server)
+	err := http.ListenAndServe(":1111", server)
 	if err != nil {
 		fmt.Println("bind error")
 	}

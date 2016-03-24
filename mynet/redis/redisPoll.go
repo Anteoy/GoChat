@@ -1,10 +1,8 @@
 package redis
 
 import (
-	"fmt"
 	"github.com/garyburd/redigo/redis"
 	"log"
-	"net/http"
 	"time"
 )
 
@@ -17,7 +15,7 @@ var (
 	RedisPool *redis.Pool
 )
 
-func initPool() {
+func InitPool() {
 	RedisPool = &redis.Pool{
 		MaxIdle:     5,
 		MaxActive:   10000,
@@ -29,7 +27,7 @@ func initPool() {
 		Dial: func() (redis.Conn, error) {
 			c, err := redis.Dial("tcp", redisServerAdress)
 			if err != nil {
-				log.Printf("Dail redis server %s %v", server, err)
+				log.Printf("Dail redis server %s %v", redisServerAdress, err)
 				return nil, err
 			}
 			if _, err := c.Do("AUTH", redisPasswd); err != nil {
