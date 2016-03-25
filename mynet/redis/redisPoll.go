@@ -15,7 +15,8 @@ var (
 	RedisPool *redis.Pool
 )
 
-func InitPool() {
+func init() {
+	log.Println("redisPoll begin init")
 	RedisPool = &redis.Pool{
 		MaxIdle:     5,
 		MaxActive:   10000,
