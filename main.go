@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	ws "golang.org/x/net/websocket"
 	c "mynet/controller"
 	_ "mynet/redis"
+	"mynet/websocket"
 	"net/http"
 	"os"
 )
@@ -13,8 +15,11 @@ func main() {
 	http.HandleFunc("/login", c.Login)
 	http.HandleFunc("/", index)
 
+	http.Handle("/ws/chat", ws.Handler(websocket.Chat))
+	http.HandleFunc("/chat", c.Chat)
+
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-	err := http.ListenAndServe(":2224", nil)
+	err := http.ListenAndServe(":9090", nil)
 	if err != nil {
 		fmt.Println("bind error")
 	}
