@@ -18,9 +18,13 @@
 		</div>
 	</div>
 	<div style="width: 80% ; float: left">
-		<textarea class="form-control" rows="36" ng-model="chatMsg"></textarea>
+		<div style="height: 90% ; overflow: auto;">
+			<div ng-repeat="msg in chatMsg">
+				<font color="green">{{msg.data}}</font>
+			</div>
+		</div>
 		<div class="input-group">
-               <input type="text" class="form-control" ng-model="msg" disabled="disabled">
+               <input type="text" class="form-control" ng-model="msg" >
                <span class="input-group-btn">
                   <button class="btn btn-success" type="button" ng-click="sendMsg();">
                      Go!

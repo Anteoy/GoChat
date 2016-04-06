@@ -1,11 +1,12 @@
 package controller
 
 import (
-	"golang.org/x/net/websocket"
 	"io"
 	"log"
 	ws "mynet/websocket"
 	"net/http"
+
+	"golang.org/x/net/websocket"
 )
 
 func Chat(w http.ResponseWriter, r *http.Request) {
@@ -13,9 +14,14 @@ func Chat(w http.ResponseWriter, r *http.Request) {
 	msg := r.Form["msg"][0]
 
 	for _, webs := range ws.Users {
+		if webs == nil {
+			continue
+		}
 		err := websocket.JSON.Send(webs, msg)
 		if err != nil {
 			log.Panic(err)
+			io.WriteString(w, "websocket is err!")
+			return
 		}
 	}
 

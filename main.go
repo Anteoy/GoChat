@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
-	ws "golang.org/x/net/websocket"
 	c "mynet/controller"
 	_ "mynet/redis"
 	"mynet/websocket"
 	"net/http"
 	"os"
+
+	ws "golang.org/x/net/websocket"
 )
 
 func main() {
@@ -16,6 +17,7 @@ func main() {
 	http.HandleFunc("/", index)
 
 	http.Handle("/ws/chat", ws.Handler(websocket.Chat))
+
 	http.HandleFunc("/chat", c.Chat)
 
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))

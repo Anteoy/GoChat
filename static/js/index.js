@@ -47,12 +47,14 @@ var app = angular.module('gochat', [] ,function ($httpProvider) {
 app.controller('chat',function($scope,$http){
 
 	$scope.msg = ""
-	var chat = new WebSocket("ws://localhost:9090/ws/chat");
+	$scope.chatMsg = []
+	
+	var chat = new WebSocket("ws://localhost:3333/ws/chat");
 	chat.onopen = function(){
 		alert("连接成功")
 	}
 	chat.onmessage = function(e){
-		$scope.chatMsg = e
+		$scope.chatMsg.push(e)
 	}
 	chat.onclose = function(){
 		alert("连接中断了")
