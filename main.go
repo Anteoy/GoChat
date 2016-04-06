@@ -19,7 +19,7 @@ func main() {
 	http.HandleFunc("/chat", c.Chat)
 
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-	err := http.ListenAndServe(":9090", nil)
+	err := http.ListenAndServe(":3333", nil)
 	if err != nil {
 		fmt.Println("bind error")
 	}
