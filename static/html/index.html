@@ -3,7 +3,8 @@
 <head>
 	<title>chat home</title>
 	<link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    	<link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/static/css/chatwindow.css" rel="stylesheet">
 </head>
 <body ng-app="gochat">
 <div ng-controller="chat">
@@ -18,10 +19,10 @@
 		</div>
 	</div>
 	<div style="width: 80% ; float: left">
-		<div style="height: 90% ; overflow: auto;">
-			<div ng-repeat="msg in chatMsg">
-				<font color="green">{{msg.data}}</font>
-			</div>
+		<div id="convo" data-from="Sonu Joshi">  
+			<ul class="chat-thread">
+				<li ng-repeat="msg in chatMsg">{{msg.data}}</li>
+			</ul>
 		</div>
 		<div class="input-group">
                <input type="text" class="form-control" ng-model="msg" >
