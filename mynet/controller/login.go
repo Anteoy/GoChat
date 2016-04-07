@@ -9,15 +9,14 @@ import (
 )
 
 func Login(w http.ResponseWriter, r *http.Request) {
-
-	paras := r.URL.Query()
-	ids := paras["id"]
+	r.ParseForm()
+	ids := r.Form["id"]
 	if ids == nil {
 		io.WriteString(w, "请输入账号")
 		return
 	}
 	id := ids[0]
-	passwds := paras["passwd"]
+	passwds := r.Form["passwd"]
 	if passwds == nil {
 		io.WriteString(w, "请输入密码")
 		return

@@ -44,6 +44,11 @@ var app = angular.module('gochat', [] ,function ($httpProvider) {
     } ];
 })
 
+app.filter('killMark',function(){
+	return function(msg){
+		return msg.substring(1,msg.length-1)
+	}
+})
 app.controller('chat',function($scope,$http){
 
 	$scope.msg = ""
@@ -55,6 +60,7 @@ app.controller('chat',function($scope,$http){
 	}
 	chat.onmessage = function(e){
 		$scope.chatMsg.push(e)
+		$scope.$apply()
 	}
 	chat.onclose = function(){
 		alert("连接中断了")
@@ -66,13 +72,24 @@ app.controller('chat',function($scope,$http){
 			method:"post" ,
 			data:{msg : $scope.msg}
 		}).success(function(data){
-			if(data != undefined){
-				alert("send success!")
+			if(data == "success"){
+				$scope.msg=""
+			}else{
+				$scope.chatMsg.push({data:"This message send in error!"})
 			}
+		}).error(function(data){
+			$scope.chatMsg.push({data:"This message send in error!"})
 		})
 	}
 
 })
+
+document.onkeydown=function(event){
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+            if(e && e.keyCode==13){ // 按 Enter 
+                 $("#send").click()
+               }
+ }; 
 
 
 //var chatfriends = new WebSocket("ws://localhost:8080/ws/chatFriends");

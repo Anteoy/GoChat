@@ -21,13 +21,13 @@
 	<div style="width: 80% ; float: left">
 		<div id="convo" data-from="Sonu Joshi">  
 			<ul class="chat-thread">
-				<li ng-repeat="msg in chatMsg">{{msg.data}}</li>
+				<li ng-repeat="msg in chatMsg">{{msg.data | killMark}}</li>
 			</ul>
 		</div>
 		<div class="input-group">
                <input type="text" class="form-control" ng-model="msg" >
                <span class="input-group-btn">
-                  <button class="btn btn-success" type="button" ng-click="sendMsg();">
+                  <button class="btn btn-success" type="button" id="send" ng-click="sendMsg();">
                      Go!
                   </button>
                </span>
