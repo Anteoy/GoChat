@@ -5,26 +5,38 @@ import (
 	"log"
 	ws "mynet/websocket"
 	"net/http"
-
-	"golang.org/x/net/websocket"
+	"strconv"
 )
+
+type Msg struct {
+	Id  int    `json:"id"`
+	Msg string `json:"msg"`
+}
 
 func Chat(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
-	msg := r.Form["msg"][0]
-
-	for _, user := range ws.Users {
-		if user == nil {
-			continue
-		}
-		err := websocket.JSON.Send(user.Ws, msg)
-		if err != nil {
-			log.Panic(err)
-			io.WriteString(w, "websocket is err!")
-			return
-		}
-	}
-
+	msgstring := r.Form["msg"][0]
+	myid := GetMyId(r)
+	msg := &Msg{Id: myid, Msg: msgstring}
+	ws.SendAll(msg)
 	io.WriteString(w, "success")
 
+}
+
+func ChatFromId(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	msg := r.Form["msg"][0]
+	id, err := strconv.Atoi(r.Form["fromid"][0])
+	if err != nil {
+		io.WriteString(w, "error")
+		log.Println(err)
+		return
+	}
+	err = ws.SendByUserId(id, msg)
+	if err != nil {
+		io.WriteString(w, "error")
+		log.Println(err)
+		return
+	}
+	io.WriteString(w, "success")
 }

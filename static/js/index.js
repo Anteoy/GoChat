@@ -44,22 +44,37 @@ var app = angular.module('gochat', [] ,function ($httpProvider) {
     } ];
 })
 
-app.filter('killMark',function(){
+app.filter('myMsgInRight',function(){
 	return function(msg){
-		return msg.substring(1,msg.length-1)
+		if(msg) return "'right"
+		return "left"
 	}
 })
 app.controller('chat',function($scope,$http){
 
 	$scope.msg = ""
 	$scope.chatMsg = []
+	$http({url:"/myid"}).success(function(data){
+		$scope.myid = data
+	})
 	
 	var chat = new WebSocket("ws://localhost:3333/ws/chat");
 	chat.onopen = function(){
 		alert("连接成功")
 	}
 	chat.onmessage = function(e){
-		$scope.chatMsg.push(e)
+		var msg = JSON.parse(e.data)
+		if(typeof msg.msg == 'string'){
+			if(msg.id == $scope.myid){
+				msg.rightOrLeft = {float:"right"}
+			}else{
+				msg.rightOrLeft = {float:"left"}
+			}
+			$scope.chatMsg.push(msg)
+		}
+		if(typeof msg[0] == 'number'){
+			$scope.onlineusers = msg
+		}
 		$scope.$apply()
 	}
 	chat.onclose = function(){

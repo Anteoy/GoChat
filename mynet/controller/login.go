@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"strconv"
 	"time"
+
+	gredis "github.com/garyburd/redigo/redis"
 )
 
 func Login(w http.ResponseWriter, r *http.Request) {
@@ -34,6 +36,18 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 addSIIsError:
 	http.ServeFile(w, r, "./static/html/login.html")
+}
+
+func MyId(w http.ResponseWriter, r *http.Request) {
+	userid := GetMyId(r)
+	io.WriteString(w, strconv.Itoa(userid))
+}
+
+func GetMyId(r *http.Request) int {
+	thisCookie, _ := r.Cookie("GoSessionId")
+	cookie := thisCookie.Value
+	userid, _ := gredis.Int(redis.Do("HGET", "sessionid", cookie))
+	return userid
 }
 
 func addSessionId(w http.ResponseWriter, r *http.Request, id string) error {

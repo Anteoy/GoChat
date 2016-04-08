@@ -15,11 +15,10 @@ func main() {
 
 	http.HandleFunc("/login", c.Login)
 	http.HandleFunc("/", index)
+	http.HandleFunc("/chat", c.Chat)
+	http.HandleFunc("/myid", c.MyId)
 
 	http.Handle("/ws/chat", ws.Handler(websocket.Chat))
-
-	http.HandleFunc("/chat", c.Chat)
-
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	err := http.ListenAndServe(":3333", nil)
 	if err != nil {

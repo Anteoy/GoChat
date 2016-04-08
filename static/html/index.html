@@ -13,15 +13,15 @@
 			<a class="panel-title" data-toggle="collapse" data-parent="#panel-787069" href="#panel-element-841578"><strong><h3>Online:</h3></strong></a>
 		</div>
 		<div id="panel-element-841578" class="panel-collapse in">
-			<div class="panel-body">
-				Anim pariatur cliche...
+			<div class="panel-body" ng-repeat="user in onlineusers">
+				{{user}}
 			</div>
 		</div>
 	</div>
 	<div style="width: 80% ; float: left">
 		<div id="convo" data-from="Sonu Joshi">  
 			<ul class="chat-thread">
-				<li ng-repeat="msg in chatMsg">{{msg.data | killMark}}</li>
+				<li ng-repeat="msg in chatMsg" ng-style="msg.rightOrLeft">{{msg.msg}}</li>
 			</ul>
 		</div>
 		<div class="input-group">

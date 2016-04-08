@@ -2,6 +2,7 @@ package websocket
 
 import (
 	"fmt"
+	"log"
 	"mynet/redis"
 
 	gredis "github.com/garyburd/redigo/redis"
@@ -26,6 +27,35 @@ func DeleteUserFromUsers(user *UserWebsocket) {
 	}
 }
 
+func SendAll(msg interface{}) {
+
+	for _, user := range Users {
+		if user == nil {
+			continue
+		}
+		err := webs.JSON.Send(user.Ws, msg)
+		if err != nil {
+			log.Panic(err)
+			continue
+		}
+	}
+
+}
+
+func SendByUserId(id int, msg interface{}) error {
+
+	for _, user := range Users {
+		if user == nil {
+			continue
+		}
+		if id == user.UserId {
+			err := webs.JSON.Send(user.Ws, msg)
+			return err
+		}
+	}
+	return nil
+}
+
 func Chat(ws *webs.Conn) {
 
 	r := ws.Request()
@@ -33,6 +63,7 @@ func Chat(ws *webs.Conn) {
 	cookie := thisCookie.Value
 	userid, _ := gredis.Int(redis.Do("HGET", "sessionid", cookie))
 	user := &UserWebsocket{UserId: userid, Ws: ws}
+	onlineUser := make([]int, 0, 20)
 
 	fmt.Println(Users)
 	for {
@@ -45,6 +76,10 @@ func Chat(ws *webs.Conn) {
 			}
 		}
 		Users = append(Users, user)
+		for _, user := range Users {
+			onlineUser = append(onlineUser, user.UserId)
+		}
+		SendAll(onlineUser)
 	forend:
 	}
 }
