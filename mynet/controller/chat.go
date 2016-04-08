@@ -13,11 +13,11 @@ func Chat(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	msg := r.Form["msg"][0]
 
-	for _, webs := range ws.Users {
-		if webs == nil {
+	for _, user := range ws.Users {
+		if user == nil {
 			continue
 		}
-		err := websocket.JSON.Send(webs, msg)
+		err := websocket.JSON.Send(user.Ws, msg)
 		if err != nil {
 			log.Panic(err)
 			io.WriteString(w, "websocket is err!")

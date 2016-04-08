@@ -1,11 +1,23 @@
 package redis
 
 import (
-	"github.com/garyburd/redigo/redis"
 	"log"
 	"mynet"
 	"strconv"
+
+	"github.com/garyburd/redigo/redis"
 )
+
+func Do(commandName string, args ...interface{}) (interface{}, error) {
+	c := RedisPool.Get()
+	defer c.Close()
+
+	result, err := c.Do(commandName, args...)
+	if err != nil {
+		log.Panic(err)
+	}
+	return result, err
+}
 
 func Incr(name string) int {
 	c := RedisPool.Get()
