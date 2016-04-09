@@ -20,7 +20,7 @@ func main() {
 
 	http.Handle("/ws/chat", ws.Handler(websocket.Chat))
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-	err := http.ListenAndServe(":3333", nil)
+	err := http.ListenAndServe(":8888", nil)
 	if err != nil {
 		fmt.Println("bind error")
 	}

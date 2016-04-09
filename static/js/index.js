@@ -58,7 +58,7 @@ app.controller('chat',function($scope,$http){
 		$scope.myid = data
 	})
 	
-	var chat = new WebSocket("ws://localhost:3333/ws/chat");
+	var chat = new WebSocket("ws://localhost:8888/ws/chat");
 	chat.onopen = function(){
 		alert("连接成功")
 	}
@@ -66,9 +66,9 @@ app.controller('chat',function($scope,$http){
 		var msg = JSON.parse(e.data)
 		if(typeof msg.msg == 'string'){
 			if(msg.id == $scope.myid){
-				msg.rightOrLeft = {float:"right"}
+				msg.rightOrLeft = "chat-thread-right"
 			}else{
-				msg.rightOrLeft = {float:"left"}
+				msg.rightOrLeft = "chat-thread-left"
 			}
 			$scope.chatMsg.push(msg)
 		}
