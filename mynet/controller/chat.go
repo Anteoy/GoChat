@@ -3,6 +3,7 @@ package controller
 import (
 	"io"
 	"log"
+	"mynet/mysql"
 	ws "mynet/websocket"
 	"net/http"
 	"strconv"
@@ -18,6 +19,9 @@ func Chat(w http.ResponseWriter, r *http.Request) {
 	msgstring := r.Form["msg"][0]
 	myid := GetMyId(r)
 	msg := &Msg{Id: myid, Msg: msgstring}
+
+	mysql.InsertChatContent(strconv.Itoa(myid), msgstring)
+
 	ws.SendAll(msg)
 	io.WriteString(w, "success")
 
