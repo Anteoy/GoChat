@@ -1,5 +1,5 @@
 !<arch>
-__.PKGDEF       0           0     0     644     19339     `
+__.PKGDEF       0           0     0     644     19341     `
 go object linux amd64 go1.6.2 X:none
 build id "0ae1177f90cc428c3633ab1495615e11aedb6f8a"
 
@@ -17,7 +17,7 @@ package redis
 	func @"".GetFromConn (@"".c·2 @"github.com/garyburd/redigo/redis".Conn, @"".name·3 string) (? string)
 	func @"".Set (@"".name·2 string, @"".value·3 string) (? int)
 	func @"".SetFromConn (@"".c·2 @"github.com/garyburd/redigo/redis".Conn, @"".name·3 string, @"".value·4 string) (? int)
-	type @"mynet".User struct { Id int; Name string; Pass string; Friends string; Other string }
+	type @"mynet".User struct { Id int; Name string; Passwd string; Friends string; Other string }
 	func @"".AddUser (@"".user·2 *@"mynet".User "esc:0x9") (? bool)
 	func @"".GetUser (@"".id·2 int) (? *@"mynet".User)
 	type @"time".zone struct { @"time".name string; @"time".offset int; @"time".isDST bool }

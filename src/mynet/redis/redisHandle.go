@@ -70,7 +70,7 @@ func AddUser(user *mynet.User) bool {
 	id := Incr("NO")
 	count := 0
 	count += SetFromConn(c, "user:"+strconv.Itoa(id)+":name", user.Name)
-	count += SetFromConn(c, "user:"+strconv.Itoa(id)+":pass", user.Pass)
+	count += SetFromConn(c, "user:"+strconv.Itoa(id)+":pass", user.Passwd)
 	count += SetFromConn(c, "user:"+strconv.Itoa(id)+":friends", user.Friends)
 	count += SetFromConn(c, "user:"+strconv.Itoa(id)+":other", user.Other)
 	if count != 4 {

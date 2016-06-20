@@ -3,7 +3,7 @@ package mynet
 type User struct {
 	Id      int
 	Name    string
-	Pass    string
+	Passwd  string
 	Friends string
 	Other   string
 }

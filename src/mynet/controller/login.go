@@ -4,6 +4,7 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"io"
+	"mynet/mysql"
 	"mynet/redis"
 	"net/http"
 	"strconv"
@@ -27,9 +28,8 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	passwd := passwds[0]
-	passwdForRedis := redis.Get("user:" + id + ":pass")
-
-	if passwd == passwdForRedis {
+	user := mysql.GetUserForEmail(id)
+	if user != nil && user.Passwd == passwd {
 		if err := addSessionId(w, r, id); err != nil {
 			goto addSIIsError
 		}
