@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>doob登录页面</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/login.css" rel="stylesheet">
+    <link href="/static/css/login1.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-datetimepicker.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Top content -->
+<div class="top-content">
+    <div class="inner-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <font size="13"><strong>doob is sweet</strong></font>
+                    <div class="description">
+                    	<p>
+                        	科技成就未来，<strong>doob</strong>助你腾飞!
+                    	</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 form-box">
+                	<div class="form-top">
+                		<div class="form-top-left">
+                			<h2>登录doob chat</h2>
+                    		<p>请输入你的用户名和密码：</p>
+                		</div>
+                		<div class="form-top-right">
+                			<i class="fa fa-key"></i>
+                		</div>
+                    </div>
+                    <div class="form-bottom">
+	                    <form role="form" action="login" method="post" class="login-form">
+	                    	<div class="form-group">
+	                    		<label class="sr-only" for="form-username">Username</label>
+	                        	<input type="text" name="id" placeholder="Username..." class="form-username form-control" id="form-username">
+	                        </div>
+	                        <div class="form-group">
+	                        	<label class="sr-only" for="form-password">Password</label>
+	                        	<input type="password" name="passwd" placeholder="Password..." class="form-password form-control" id="form-password">
+	                        </div>
+	                        <button type="submit" class="btn" id="login">登录!</button>
+	                    </form>
+                    </div>
+                </div>
+            </div>
+				<!-- 模态框（Modal） -->
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+					   aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" 
+									data-dismiss="modal" aria-hidden="true">
+									&times;
+									</button>
+									<h4 class="modal-title" id="myModalLabel">
+								 	<h2 style="color:grren">填写注册信息</h2>
+									</h4>
+								</div>
+									<div class="modal-body">
+										<input type="text" name="denglm" placeholder="此名以后将作为登录名..." class="form-username form-control" id="denglm">
+										<input type="text" name="mim" placeholder="密码..." class="form-password form-control" id="mim">
+										<input type="text" name="bh" placeholder="输入你在公司的编号..." class="form-username form-control" id="bh">
+										<input type="text" name="姓名" placeholder="输入你的真实姓名..." class="form-username form-control" id="xingm">
+									</div>
+								         <div class="modal-footer">
+								            <button type="button" class="btn btn-default" 
+								               data-dismiss="modal">关闭
+								            </button>
+								            <button type="button" class="btn btn-primary" id="zhuce">
+								               	注册
+								            </button>
+								         </div>
+								      </div><!-- /.modal-content -->
+								</div><!-- /.modal -->
+							</div>
+							<div class="row">
+                    			<div class="col-sm-6 col-sm-offset-3 social-login">
+                    				<h3>...或者在这里注册:</h3>
+                    				<div class="social-login-buttons">
+                        			<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+									注册
+								</button>
+                    	</div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+</body>
+
+
+<!-- Javascript -->
+<script src="//cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="//cdn.bootcss.com/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+<script src="/static/js/login.js"></script>
+        
+</html>
