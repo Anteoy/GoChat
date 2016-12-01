@@ -12,6 +12,7 @@ import (
 )
 
 func main() {
+	fmt.Println("start")
 
 	http.HandleFunc("/login", c.Login)
 	http.HandleFunc("/", index)
@@ -20,6 +21,7 @@ func main() {
 
 	http.Handle("/ws/chat", ws.Handler(websocket.Chat))
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	fmt.Println("start")
 	err := http.ListenAndServe(":8888", nil)
 	if err != nil {
 		fmt.Println("bind error")

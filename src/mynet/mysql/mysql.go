@@ -12,7 +12,7 @@ var db *sql.DB
 
 func init() {
 	var err error
-	db, err = sql.Open("mysql", "fudali:fudali133@tcp(139.129.4.187:3306)/godoob?charset=utf8")
+	db, err = sql.Open("mysql", "root:123@tcp(localhost:3306)/godoob?charset=utf8")
 	checkErr(err)
 	db.SetMaxOpenConns(2000)
 	db.SetMaxIdleConns(1000)

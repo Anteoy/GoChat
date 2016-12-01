@@ -7,8 +7,8 @@ import (
 )
 
 const (
-	redisServerAdress = "139.129.4.187:6379"
-	redisPasswd       = "123456"
+	redisServerAdress = "localhost:6379"
+	redisPasswd       = "123"
 )
 
 var (
